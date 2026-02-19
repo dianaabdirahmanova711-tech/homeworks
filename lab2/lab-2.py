@@ -1,4 +1,4 @@
-
+#1
 file= open("shop_logs.txt", "r")
 unique_users=set() #пользователи
 total_purchases=0 #кол-во покупок
@@ -32,7 +32,7 @@ if total_purchases>0:
     total_average=total_sum/total_purchases
 else:
     total_average=0
-report=open("shop_logs.txt","w")
+report=open("shop_log.txt","w",encoding="utf-8")
 report.write("Уникальных пользователей:" + str(len(unique_users)) + "\n")
 report.write("Кол-во покупок:"+str(total_purchases)+"\n")
 report.write("Общая сумма:"+str(total_sum)+"\n")
