@@ -30,3 +30,31 @@ info=[
 with open("students.csv","w",newline="",encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerows(info)
+
+
+#2task
+import csv
+employs=[]
+with open("employees.csv","r",newline="",encoding="utf-8") as f:
+    reader=csv.DictReader(f)
+    for i in reader:
+        i["salary"]=int(i["salary"])
+        employs.append(i)
+total_salary=sum(emp["salary"] for emp in employs)
+average_salary=total_salary/len(employs)
+print(f"Орташа жалақы: {average_salary:.2f}")
+
+departments=[]
+for n in employs:
+    a=n["department"]
+    if a not in departments:
+        departments[a]=[]
+    departments[a].append(n["salary"])
+
+dept_averages={}
+for a,salaries in departments.items():
+    orta=sum(salaries)/len(salaries)
+    dept_averages[a]=orta
+    print(f"{a} орташа жалақысы: {orta:.2f}")
+
+kop_jalaky=
