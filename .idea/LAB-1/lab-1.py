@@ -1,5 +1,8 @@
-with open("file.txt","w",encoding="utf-8") as f:
-    f.write("Hello Diana\n")
-    f.write("Hi Nazerke\n")
+
+import csv
+
+file=open("employees.csv","r")
+reader= csv.DictReader(file)
+
 
 
