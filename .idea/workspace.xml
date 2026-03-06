@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74ae2e48-29b4-484b-be38-558be4f27638" name="Changes" comment="tasks">
-      <change afterPath="$PROJECT_DIR$/lab3/lab-3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/1.task.py" beforeDir="false" afterPath="$PROJECT_DIR$/lab1/1.task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/lab3/lab3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab3/lab-3.py" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/lab-3.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,26 +25,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "searchQuery": "terminal",
-      "state": "OPEN",
-      "assignee": "dianaabdirahmanova711-tech"
+      &quot;searchQuery&quot;: &quot;terminal&quot;,
+      &quot;state&quot;: &quot;OPEN&quot;,
+      &quot;assignee&quot;: &quot;dianaabdirahmanova711-tech&quot;
     }
   ],
-  "lastFilter": {
-    "searchQuery": "terminal",
-    "state": "OPEN",
-    "assignee": "dianaabdirahmanova711-tech"
+  &quot;lastFilter&quot;: {
+    &quot;searchQuery&quot;: &quot;terminal&quot;,
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dianaabdirahmanova711-tech&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/dianaabdirahmanova711-tech/homeworks.git&quot;,
     &quot;accountId&quot;: &quot;064e450a-7d2c-420b-835a-eab2870b9471&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -72,7 +78,7 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Diana/Desktop/homework&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.lab3">
+  <component name="RunManager" selected="Python.1.task">
     <configuration name="1.task" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <option name="ENV_FILES" value="" />
@@ -207,9 +213,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.1.task" />
         <item itemvalue="Python.lab3" />
         <item itemvalue="Python.lab-2 (1)" />
-        <item itemvalue="Python.1.task" />
         <item itemvalue="Python.lab-2" />
         <item itemvalue="Python.lab2" />
       </list>
