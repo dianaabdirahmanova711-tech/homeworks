@@ -258,3 +258,8 @@ print("\n✅ fraud_report.txt файлы құрылды!")
 print("✅ fraud_users.json файлы құрылды!")
 
 
+
+
+
+
+
