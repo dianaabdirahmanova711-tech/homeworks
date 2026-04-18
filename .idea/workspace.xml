@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74ae2e48-29b4-484b-be38-558be4f27638" name="Changes" comment="tasks">
-      <change afterPath="$PROJECT_DIR$/lab.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/lab3.c.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4/4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4/lab4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab5/lab-5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/LAB-1/names.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LAB-1/names.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/LAB-1/second.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LAB-1/second.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab1/1.task.py" beforeDir="false" afterPath="$PROJECT_DIR$/lab1/1.task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/employees.csv" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/employees.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/high_salary.csv" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/high_salary.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/shop_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/shop_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/shop_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/shop_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab5/lab-5.py" beforeDir="false" afterPath="$PROJECT_DIR$/lab5/lab-5.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

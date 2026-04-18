@@ -191,7 +191,72 @@ class OrderIterator:
             self._index += 1
             return res
         raise StopIteration
+#Block2
+#11
+import numpy as np
+def get_prices_array(products):
+    return np.array([p.price for p in products], dtype=float)
+products = [Product(1,"Laptop",1200.0,"Electronics"), Product(2,"Mouse",25.0,"Electronics")]
+print(get_prices_array(products))
 
+#12
+def get_price_stats(prices_array):
+    mean_price = np.mean(prices_array)
+    median_price = np.median(prices_array)
+    return (mean_price, median_price)
+print(get_price_stats(np.array([1200.0, 25.0, 450.0])))
+
+#13
+def normalize_prices(prices_array):
+    min_p = np.min(prices_array)
+    max_p = np.max(prices_array)
+    return (prices_array - min_p) / (max_p - min_p)
+print(normalize_prices(np.array([1200.0, 25.0, 450.0])))
+
+#14
+def get_categories_array(products):
+    return np.array([p.category for p in products])
+products14 = [Product(1,"Laptop",1200.0,"Electronics"), Product(2,"T-Shirt",20.0,"Clothing")]
+print(get_categories_array(products14))
+
+#15
+def count_unique_categories(categories_array):
+    return len(np.unique(categories_array))
+print(count_unique_categories(np.array(["Electronics", "Clothing", "Electronics"])))
+
+#16
+def products_above_average(products):
+    prices_array = np.array([p.price for p in products])
+    mean_price = np.mean(prices_array)
+    return [p for p in products if p.price > mean_price]
+
+products16 = [Product(1,"Laptop",1200.0,"Electronics"), Product(2,"Mouse",25.0,"Electronics"), Product(3,"Monitor",450.0,"Electronics")]
+print(products_above_average(products16))
+
+#17
+def apply_discount(prices_array):
+    return prices_array * 0.9
+print(apply_discount(np.array([1200.0, 25.0, 450.0])))
+
+#18
+def get_orders_matrix(orders):
+    amounts = [[sum(p.price for p in o.products)] for o in orders]
+    return np.array(amounts)
+u1 = User(1, "Diana Abdr", "diana@gmail.com")
+u2 = User(2, "Zere B", "zere.bd@gmail.com")
+orders = [Order(1,u1,[Product(1,"Laptop",1200.0,"Electronics")]), Order(2,u2,[Product(2,"Mouse",25.0,"Electronics"), Product(1,"Laptop",1200.0,"Electronics")])]
+print(get_orders_matrix(orders))
+
+#19
+def average_order_amount(amounts_array):
+    return np.mean(amounts_array)
+print(average_order_amount(np.array([1200.0, 1225.0])))
+
+#20
+def expensive_order_indices(amounts_array):
+    indices = np.where(amounts_array > 1000)[0]
+    return indices.tolist()
+print(expensive_order_indices(np.array([1200.0, 900.0, 1500.0])))
 
 #Block3
 #21
