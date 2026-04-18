@@ -1,3 +1,249 @@
+#1
+def analyze_text(text):
+    vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+    text_lower = text.lower()
+
+    found_vowels = []
+    for ch in text_lower:
+        if ch.isalpha() and ch in vowels.lower() and ch not in found_vowels:
+            found_vowels.append(ch)
+    unique_vowels = len(found_vowels)
+
+    words = []
+    for word in text.split():
+        clean = ""
+        for ch in word:
+            if ch.isalpha():
+                clean += ch
+        if len(clean) >= 5 and clean[0].lower() == clean[-1].lower():
+            if clean not in words:
+                words.append(clean)
+
+    return (unique_vowels, " ".join(words))
+#2
+task2 = lambda s: " ".join(
+    word[::-1] for word in s.split()
+    if not any(ch.isdigit() for ch in word) and len(word) % 2 == 0
+)
+
+#3
+def top_k_words(text, k):
+    clean_text = ""
+    for ch in text:
+        if ch.isalnum() or ch.isspace():
+            clean_text += ch
+        else:
+            clean_text += " "
+
+    words = clean_text.lower().split()
+
+    freq = {}
+    for w in words:
+        if w in freq:
+            freq[w] += 1
+        else:
+            freq[w] = 1
+
+    items = []
+    for key in freq:
+        items.append((key, freq[key]))
+
+    n = len(items)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if items[j][1] < items[j + 1][1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+            elif items[j][1] == items[j + 1][1]:
+                if items[j][0] > items[j + 1][0]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+
+    result = []
+    for i in range(min(k, len(items))):
+        result.append(items[i][0])
+
+    return result
+
+#4
+task4 = lambda s: " ".join(
+    w.lower() for w in s.split()
+    if sum(1 for ch in w if ch.isupper()) == 1
+    and not (w[0].isupper() or w[-1].isupper())
+)
+
+#5
+def compress_text(text):
+    if not text:
+        return ""
+
+    result = []
+    count = 1
+    for i in range(1, len(text)):
+        if text[i].lower() == text[i - 1].lower():
+            count += 1
+        else:
+            result.append(text[i - 1] + (str(count) if count > 1 else ""))
+            count = 1
+    result.append(text[-1] + (str(count) if count > 1 else ""))
+    return "".join(result)
+
+#6
+task6 = lambda s: [
+    w for w in s.split() if len(w) >= 4
+    and w.isalpha()
+    and len(set(w)) == len(w)
+]
+
+
+#7
+def palindrome_words(text):
+    words = []
+    for w in text.split():
+        clean = ""
+        for ch in w:
+            if ch.isalpha():
+                clean += ch.lower()
+        if len(clean) >= 3 and clean == clean[::-1]:
+            if clean not in words:
+                words.append(clean)
+
+    n = len(words)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if len(words[j]) < len(words[j + 1]):
+                words[j], words[j + 1] = words[j + 1], words[j]
+            elif len(words[j]) == len(words[j + 1]):
+                if words[j] > words[j + 1]:
+                    words[j], words[j + 1] = words[j + 1], words[j]
+
+    return words
+
+
+#8
+vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+task8 = lambda s: " ".join(
+    "VOWEL" if w.isalpha() and w[0].lower() in vowels.lower() else
+    "CONSONANT" if w.isalpha() and w[0].lower() not in vowels.lower() else
+    w
+    for w in s.split()
+)
+
+#9
+def alternate_case_blocks(text, n):
+    blocks = []
+    for i in range(0, len(text), n):
+        blocks.append(text[i:i + n])
+
+    result = []
+    for i in range(len(blocks)):
+        if i % 2 == 0:
+            result.append(blocks[i].upper())
+        else:
+            result.append(blocks[i].lower())
+
+    return "".join(result)
+
+#10
+task10 = lambda s: sum(
+    1 for w in s.split()
+    if any(ch.isdigit() for ch in w)
+    and not w[0].isdigit()
+    and len(w) >= 5
+)
+
+
+#11
+def common_unique_chars(s1, s2):
+    s2_chars = []
+    for ch in s2:
+        if ch.isalpha() and ch not in s2_chars:
+            s2_chars.append(ch)
+
+    result = []
+    for ch in s1:
+        if ch.isalpha() and ch not in result:
+            for ch2 in s2_chars:
+                if ch == ch2:
+                    result.append(ch)
+                    break
+
+    return "".join(result)
+
+#12
+task12 = lambda s: [
+    w for w in s.split()
+    if w[0].lower() == w[-1].lower()
+    and w.lower() != w[::-1].lower()
+    and len(w) > 3
+]
+
+
+#13
+def replace_every_nth(text, n, char):
+    result = list(text)
+    count = 0
+    i = 0
+    while i < len(text):
+        if text[i] not in " 0123456789":
+            count += 1
+            if count % n == 0:
+                start = i
+                while start >= 0 and text[start] not in " 0123456789":
+                    start -= 1
+                end = i
+                while end < len(text) and text[end] not in " 0123456789":
+                    end += 1
+                word_len = end - start - 1
+                if word_len >= 3:
+                    result[i] = char
+        i += 1
+    return "".join(result)
+
+
+#14
+vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+task14 = lambda s: ", ".join(
+    w for w in s.split()
+    if len(set(w)) > 3
+    and len([ch for ch in w if ch in vowels]) == len(set(ch for ch in w if ch in vowels))
+)
+
+#15
+def word_pattern_sort(text):
+    vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+    words_by_len = {}
+
+    for w in text.split():
+        l = len(w)
+        if l not in words_by_len:
+            words_by_len[l] = []
+        words_by_len[l].append(w)
+
+    result = []
+    for length in sorted(words_by_len.keys()):
+        group = words_by_len[length]
+
+        vowel_counts = []
+        for word in group:
+            count = 0
+            for ch in word.lower():
+                if ch in vowels.lower():
+                    count += 1
+            vowel_counts.append((word, count))
+
+        n = len(vowel_counts)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if vowel_counts[j][1] < vowel_counts[j + 1][1]:
+                    vowel_counts[j], vowel_counts[j + 1] = vowel_counts[j + 1], vowel_counts[j]
+                elif vowel_counts[j][1] == vowel_counts[j + 1][1]:
+                    if vowel_counts[j][0] > vowel_counts[j + 1][0]:
+                        vowel_counts[j], vowel_counts[j + 1] = vowel_counts[j + 1], vowel_counts[j]
+
+        for word, _ in vowel_counts:
+            result.append(word)
+
+    return result
+
 # 16.1
 def transform_list(nums):
     result = []

@@ -8,3 +8,146 @@
 8
 9
 10
+
+#4
+task4 = lambda s: " ".join(
+    w.lower() for w in s.split()
+    if sum(1 for ch in w if ch.isupper()) == 1
+    and not (w[0].isupper() or w[-1].isupper())
+)
+
+
+#14
+vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+task14 = lambda s: ", ".join(
+    w for w in s.split()
+    if len(set(w)) > 3
+    and len([ch for ch in w if ch in vowels]) == len(set(ch for ch in w if ch in vowels))
+)
+
+# 24.1
+def longest_increasing_sublist(nums):
+    if not nums:
+        return []
+
+    max_sublist = []
+    current_sublist = [nums[0]]
+
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i - 1]:
+            current_sublist.append(nums[i])
+        else:
+            if len(current_sublist) > len(max_sublist):
+                max_sublist = current_sublist
+            current_sublist = [nums[i]]
+
+    if len(current_sublist) > len(max_sublist):
+        max_sublist = current_sublist
+
+    return max_sublist
+
+
+print(longest_increasing_sublist([1, 2, 3, 2, 3, 4, 1, 2]))
+
+
+#4
+def filter_sets(sets_list):
+    res = []
+    for set in sets_list:
+       if len(set) > 3:
+           negative = False
+           even_number = False
+           for num in set:
+               if num < 0:
+                   negative = True
+               if num % 2 == 0:
+                   even_number = True
+           if even_number and not negative:
+                res.append(set)
+    return res
+
+sets = [
+    {1, 2, 3, 4},
+    {-1, 2, 3, 4, 5},
+    {1, 3, 5, 7},
+    {1, 2, 3},
+    {2, 4, 6, 8, 10},
+    {0, 1, 2, 3, -5},
+    {10, 20, 30, 40},
+]
+print(filter_sets(sets))
+
+
+#14
+def top_k_frequent(nums, k):
+    res = set()
+    count = 0
+    x = {}
+    for num in nums:
+        if num in x:
+            x[num] += 1
+        else:
+            x[num] = 1
+    while count < k and len(x) > 0:
+        best_num = None
+        best = -1
+        for num in x:
+            if x[num] > best:
+                best = x[num]
+                best_num = num
+            elif x[num] == best and num < best_num:
+                best_num = num
+        res.add(best_num)
+        del x[best_num]
+        count += 1
+    return res
+
+task_14 = [1, 1, 1, 3, 2, 4, 3]
+print(top_k_frequent(task_14, 2))
+
+
+#24
+def union_of_filtered_sets(sets_list):
+    result=set()
+    for s in sets_list:
+        for num in s:
+            if num >10 and num%2!=0:
+                result.add(num)
+    return result
+sets_list=[
+    {5,11,20},
+    {13,8,25},
+    {7,30,15}
+]
+print(union_of_filtered_sets(sets_list))
+
+
+
+#34
+def top_k_smallest_unique(a,b):
+    unique=[]
+    for i in a:
+        if i not in unique:
+            unique.append(i)
+    j=0
+    while j<len(unique):
+        index=j
+        k=j+1
+        while k<len(unique):
+            if unique[k]<unique[index]:
+                index=k
+            k+=1
+        temp=unique[j]
+        unique[j]=unique[index]
+        unique[index]=temp
+        j+=1
+    result=set()
+    count=0
+    for i in unique:
+        if count<b:
+            result.add(i)
+            count+=1
+    return result
+a=list(map(int,input().split()))
+b=int(input())
+print(top_k_smallest_unique(a,b))

@@ -4,3 +4,198 @@ Dana,HR,300000
 Arman,IT,600000
 Aruzhan,Marketing,400000
 Dias,IT,450000
+#1
+def analyze_text(text):
+    vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+    text_lower = text.lower()
+
+    found_vowels = []
+    for ch in text_lower:
+        if ch.isalpha() and ch in vowels.lower() and ch not in found_vowels:
+            found_vowels.append(ch)
+    unique_vowels = len(found_vowels)
+
+#11
+def common_unique_chars(s1, s2):
+    s2_chars = []
+    for ch in s2:
+        if ch.isalpha() and ch not in s2_chars:
+            s2_chars.append(ch)
+
+    result = []
+    for ch in s1:
+        if ch.isalpha() and ch not in result:
+            for ch2 in s2_chars:
+                if ch == ch2:
+                    result.append(ch)
+                    break
+
+    return "".join(result)
+
+
+# 21.1
+result = lambda strings: list(
+    map(
+        lambda s: s.upper(),
+        filter(
+            lambda s: (
+                    s.isalpha() and
+                    len(s) > 4 and
+                    len(set(s)) == len(s)
+            ),
+            strings
+        )
+    )
+)
+
+print(result(["Hello", "world", "Python", "abcde", "letter", "Code"]))
+
+
+#1(dict and set)
+def invert_unique(d):
+    res = {}
+    for key, value in d.items():
+        if value not in res:
+            res[value] = []
+        if key not in res[value]:
+            res[value].append(key)
+    return res
+d1 = {"a" : 1, "b" : 2, "c" : 1, "d" : 3}
+print(invert_unique(d1))
+
+#11
+def group_by_length(words):
+    res = {}
+    for word in words:
+        length = len(word)
+        if length not in res:
+            res[length] = []
+        res[length].append(word)
+    return res
+
+task_11 = ["apple", "Almaty", "Nazerke"]
+print(group_by_length(task_11))
+
+#21
+def count_leaf_values(d):
+    count=0
+    for key in d:
+        value=d[key]
+        if type(value)==dict:
+            count+=count_leaf_values(value)
+        else:
+            count+=1
+    return count
+d1={
+    "apple": 5,
+    "banana": [1,2,3],
+    "kiwi": {
+        "d":10,
+        "e":{
+            "f":20,
+        }
+    }
+}
+result = count_leaf_values(d1)
+print(result)
+
+#31
+filter_d=lambda a:{k: v for k,v in a.items() if len(v)==len(set(v)) and all(len(s)>3 for s in v)}
+data={
+    "apple": ["sary","kyzyl","zhasyl"],
+    "pets":["it","mysyk","homiyak"],
+    "dari":["analgin","ketonav","paracetamol"]
+}
+print(filter_d(data))
+
+#Big Data 1
+def analyze_students(a):
+    students=[]
+    count={}
+    all_vowels=[]
+    vowels="oiuyea"
+    k=0
+    while k<len(a):
+        name=a[k]["name"]
+        digit=False
+        for i in name:
+            if "0"<=i<="9":
+                digit=True
+                break
+            if digit:
+                k+=1
+                continue
+            name=name.title()
+            grades=a[k]["grades"]
+            pro=[]
+            j=0
+            while j<len(grades):
+                g=grades[j]
+                if g<=0:
+                    j+=1
+                    continue
+                if g%2==1 and g<10:
+                    s=0
+                    n=g
+                    while n>0:
+                        s+=n%10
+                        n//=10
+                    pro.append(s)
+                elif g%2==0 and g>=10:
+                    pro.append(g*g)
+                else:
+                    pro.append(g)
+                j+=1
+        text=" ".join(a[k]["comments"]).lower()
+        word=text.split()
+        unique=[]
+        for w in word:
+            if len(w)>=4 and w!=w[::-1]:
+                exis=False
+                for v in unique:
+                    if v==w:
+                        exis=True
+                if not exis:
+                    unique.append(w)
+        for w in unique:
+            if w in count:
+                count[w]+=1
+            else:
+                count[w]=1
+            for i in w:
+                for t in vowels:
+                    if i.lower()==t:
+                        found=False
+                        for v in all_vowels:
+                            if v==t:
+                                found=True
+                        if not found:
+                            all_vowels.append(t)
+        students.append({
+            "name":name,
+            "processed":pro
+        })
+        k+=1
+    return {
+        "students":students,
+        "count":count,
+        "all_vowels":all_vowels
+    }
+data=[
+    {
+        "name":"Nazerke123",
+        "grades":[12,9,15,8],
+        "comments":["Good work","excellent effort","Needs Improvement"]
+    },
+    {
+        "name":"Diana",
+        "grades":[10,5,-2,7],
+        "comments":["Good job","very nice work","level"]
+    },
+    {
+        "name":"Maral",
+        "grades":[14,3,11],
+        "comments":["Excellent progress","Good work"]
+    }
+]
+print(analyze_students(data))

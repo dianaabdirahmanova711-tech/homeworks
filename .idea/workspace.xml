@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74ae2e48-29b4-484b-be38-558be4f27638" name="Changes" comment="tasks">
+      <change afterPath="$PROJECT_DIR$/lab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/lab3.c.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/lab4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab5/lab-5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/LAB-1/names.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LAB-1/names.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/LAB-1/second.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LAB-1/second.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab1/1.task.py" beforeDir="false" afterPath="$PROJECT_DIR$/lab1/1.task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab1/lab3/lab3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab3/lab-3.py" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/lab-3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/employees.csv" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/employees.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/high_salary.csv" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/high_salary.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/shop_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/shop_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/shop_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/shop_logs.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,16 +69,29 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
     &quot;Python.1.task.executor&quot;: &quot;Run&quot;,
     &quot;Python.1task.executor&quot;: &quot;Run&quot;,
+    &quot;Python.4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.classwork.executor&quot;: &quot;Run&quot;,
+    &quot;Python.example2.executor&quot;: &quot;Run&quot;,
     &quot;Python.file.executor&quot;: &quot;Run&quot;,
     &quot;Python.lab-1.executor&quot;: &quot;Run&quot;,
     &quot;Python.lab-2 (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.lab-2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lab-4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lab-5.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lab.executor&quot;: &quot;Run&quot;,
     &quot;Python.lab1.executor&quot;: &quot;Run&quot;,
     &quot;Python.lab2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lab3.c.executor&quot;: &quot;Run&quot;,
     &quot;Python.lab3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lab4.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.numpy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.task (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.task.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -78,8 +100,8 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Diana/Desktop/homework&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.1.task">
-    <configuration name="1.task" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.lab-5">
+    <configuration name="4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,11 +110,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab1" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab4" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab1/1.task.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab4/4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -101,7 +123,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="lab-2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="lab-4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,11 +132,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab4" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab2/lab-2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab4/lab-4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -123,7 +145,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="lab-2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="lab-5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -132,11 +154,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab1" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab5" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab1/lab-2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab5/lab-5.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -145,7 +167,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="lab2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="lab" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -158,7 +180,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -167,7 +189,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="lab3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="lab4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -176,11 +198,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab1/lab3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab4" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab1/lab3/lab3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab4/lab4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -213,11 +235,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.1.task" />
-        <item itemvalue="Python.lab3" />
-        <item itemvalue="Python.lab-2 (1)" />
-        <item itemvalue="Python.lab-2" />
-        <item itemvalue="Python.lab2" />
+        <item itemvalue="Python.lab-5" />
+        <item itemvalue="Python.lab" />
+        <item itemvalue="Python.lab4" />
+        <item itemvalue="Python.4" />
+        <item itemvalue="Python.lab-4" />
       </list>
     </recent_temporary>
   </component>
@@ -283,5 +305,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tasks" />
     <option name="LAST_COMMIT_MESSAGE" value="tasks" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lab3/lab3.c.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -6,3 +6,611 @@
 2026-02-01;user_2;BUY;300
 2026-02-01;user_1;BUY;50
 2026-02-01;user_2;LOGOUT
+
+
+#3
+def top_k_words(text, k):
+    clean_text = ""
+    for ch in text:
+        if ch.isalnum() or ch.isspace():
+            clean_text += ch
+        else:
+            clean_text += " "
+
+    words = clean_text.lower().split()
+
+    freq = {}
+    for w in words:
+        if w in freq:
+            freq[w] += 1
+        else:
+            freq[w] = 1
+
+    items = []
+    for key in freq:
+        items.append((key, freq[key]))
+
+    n = len(items)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if items[j][1] < items[j + 1][1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+            elif items[j][1] == items[j + 1][1]:
+                if items[j][0] > items[j + 1][0]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+
+    result = []
+    for i in range(min(k, len(items))):
+        result.append(items[i][0])
+
+    return result
+
+
+
+#13
+def replace_every_nth(text, n, char):
+    result = list(text)
+    count = 0
+    i = 0
+    while i < len(text):
+        if text[i] not in " 0123456789":
+            count += 1
+            if count % n == 0:
+                start = i
+                while start >= 0 and text[start] not in " 0123456789":
+                    start -= 1
+                end = i
+                while end < len(text) and text[end] not in " 0123456789":
+                    end += 1
+                word_len = end - start - 1
+                if word_len >= 3:
+                    result[i] = char
+        i += 1
+    return "".join(result)
+
+
+# 23.1
+result = lambda nums: list(
+    filter(
+        lambda pair: (
+                pair[0] > 1 and
+                all(pair[0] % i != 0 for i in range(2, int(pair[0] ** 0.5) + 1)) and
+                pair[1] % 2 != 0 and
+                pair[1] > (reduce(lambda a, b: a + b, nums) / len(nums))
+        ),
+        enumerate(nums)
+    )
+)
+
+result = lambda nums: [
+    value for index, value in
+    filter(
+        lambda pair: (
+                pair[0] > 1 and
+                all(pair[0] % i != 0 for i in range(2, int(pair[0] ** 0.5) + 1)) and
+                pair[1] % 2 != 0 and
+                pair[1] > (reduce(lambda a, b: a + b, nums) / len(nums))
+        ),
+        enumerate(nums)
+    )
+]
+
+print(result([1, 7, 3, 9, 2, 11, 4, 13]))
+
+
+
+#3
+def merge_dicts_sum(d1, d2):
+    res = {}
+    for key in d1:
+        res[key] = d1[key]
+    for key in d2:
+        key_exists = False
+        for result_key in res:
+            if key == result_key:
+                key_exists = True
+                break
+        if key_exists:
+            res[key] = res[key] + d2[key]
+        else:
+            res[key] = d2[key]
+    return res
+
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 3, 'c': 4, 'd': 5}
+print(merge_dicts_sum(dict1, dict2))
+
+
+#13
+def invert_dict_strict(d):
+    counts = {}
+    for v in d.values():
+        if v in counts:
+            counts[v] += 1
+        else:
+            counts[v] = 1
+    res = {}
+    for k, v in d.items():
+        if counts[v] == 1:
+            res[v] = k
+    return res
+task_13 = {
+    "1" : "Naz",
+    "2" : "Botagoz",
+    "3" : "Botagoz",
+    "4" : "Diana",
+    "5" : "Zere",
+    "6" : "Maral"
+}
+print(invert_dict_strict(task_13))
+
+
+
+#23
+def group_by_last_letter(words):
+    result={}
+    for word in words:
+        last=word[-1]
+        if last not in result:
+            result[last]=[]
+        if word not in result[last]:
+            result[last].append(word)
+    return result
+words=["diana","maral","bota","asyl","zere","nazerke"]
+print(group_by_last_letter(words))
+
+
+
+#33
+filter_by_avg=lambda a:(
+    lambda avg:{
+        i:j
+        for i,j in a.items()
+        if sum(j)/len(j)>avg
+    }
+)(
+    sum(sum(j) for j in a.values())/
+    sum(len(j) for j in a.values())
+    if a and sum(len(j) for j in a.values())>0 else 0
+)
+data={
+    "a":[10,20,30],
+    "b":[1,2,3],
+    "c":[40,50]
+}
+print(filter_by_avg(data))
+
+
+
+#3
+def top_k_words(text, k):
+    clean_text = ""
+    for ch in text:
+        if ch.isalnum() or ch.isspace():
+            clean_text += ch
+        else:
+            clean_text += " "
+
+    words = clean_text.lower().split()
+
+    freq = {}
+    for w in words:
+        if w in freq:
+            freq[w] += 1
+        else:
+            freq[w] = 1
+
+    items = []
+    for key in freq:
+        items.append((key, freq[key]))
+
+    n = len(items)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if items[j][1] < items[j + 1][1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+            elif items[j][1] == items[j + 1][1]:
+                if items[j][0] > items[j + 1][0]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+
+    result = []
+    for i in range(min(k, len(items))):
+        result.append(items[i][0])
+
+    return result
+
+
+#6
+task6 = lambda s: [
+    w for w in s.split() if len(w) >= 4
+    and w.isalpha()
+    and len(set(w)) == len(w)
+]
+
+
+#9
+def alternate_case_blocks(text, n):
+    blocks = []
+    for i in range(0, len(text), n):
+        blocks.append(text[i:i + n])
+
+    result = []
+    for i in range(len(blocks)):
+        if i % 2 == 0:
+            result.append(blocks[i].upper())
+        else:
+            result.append(blocks[i].lower())
+
+    return "".join(result)
+
+
+#12
+task12 = lambda s: [
+    w for w in s.split()
+    if w[0].lower() == w[-1].lower()
+    and w.lower() != w[::-1].lower()
+    and len(w) > 3
+]
+
+#15
+def word_pattern_sort(text):
+    vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+    words_by_len = {}
+
+    for w in text.split():
+        l = len(w)
+        if l not in words_by_len:
+            words_by_len[l] = []
+        words_by_len[l].append(w)
+
+    result = []
+    for length in sorted(words_by_len.keys()):
+        group = words_by_len[length]
+
+        vowel_counts = []
+        for word in group:
+            count = 0
+            for ch in word.lower():
+                if ch in vowels.lower():
+                    count += 1
+            vowel_counts.append((word, count))
+
+        n = len(vowel_counts)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if vowel_counts[j][1] < vowel_counts[j + 1][1]:
+                    vowel_counts[j], vowel_counts[j + 1] = vowel_counts[j + 1], vowel_counts[j]
+                elif vowel_counts[j][1] == vowel_counts[j + 1][1]:
+                    if vowel_counts[j][0] > vowel_counts[j + 1][0]:
+                        vowel_counts[j], vowel_counts[j + 1] = vowel_counts[j + 1], vowel_counts[j]
+
+        for word, _ in vowel_counts:
+            result.append(word)
+
+    return result
+
+
+# 18.1
+def flatten_and_filter(lst):
+    result = []
+
+    def flatten(sublist):
+        for item in sublist:
+            if isinstance(item, list):
+                flatten(item)
+            elif isinstance(item, int):
+                if (
+                        item > 0 and
+                        item % 4 != 0 and
+                        len(str(item)) > 1
+                ):
+                    result.append(item)
+
+    flatten(lst)
+    result.sort()
+    return result
+
+
+data = [1, [12, -5, [33, 8], 44], [[101, 3], 16], 25]
+print(flatten_and_filter(data))
+
+
+# 21.1
+result = lambda strings: list(
+    map(
+        lambda s: s.upper(),
+        filter(
+            lambda s: (
+                    s.isalpha() and
+                    len(s) > 4 and
+                    len(set(s)) == len(s)
+            ),
+            strings
+        )
+    )
+)
+
+print(result(["Hello", "world", "Python", "abcde", "letter", "Code"]))
+
+
+
+# 24.1
+def longest_increasing_sublist(nums):
+    if not nums:
+        return []
+
+    max_sublist = []
+    current_sublist = [nums[0]]
+
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i - 1]:
+            current_sublist.append(nums[i])
+        else:
+            if len(current_sublist) > len(max_sublist):
+                max_sublist = current_sublist
+            current_sublist = [nums[i]]
+
+    if len(current_sublist) > len(max_sublist):
+        max_sublist = current_sublist
+
+    return max_sublist
+
+
+print(longest_increasing_sublist([1, 2, 3, 2, 3, 4, 1, 2]))
+
+# 27.1
+result = lambda strings: sorted(
+    strings,
+    key=lambda s: (-len(s), s)
+)[:5]
+
+print(result(["apple", "banana", "kiwi", "cherry", "date", "fig", "grapefruit"]))
+
+# 30.1
+def analyze_strings_list(words):
+    seen = set()
+    result = []
+
+    for word in words:
+        if any(char.isdigit() for char in word):
+            continue
+
+        if len(word) % 2 == 0:
+            processed = word[::-1]
+        else:
+            processed = word.upper()
+
+        if processed not in seen:
+            seen.add(processed)
+            result.append(processed)
+
+    return result
+
+
+words = ["hello", "world1", "python", "code", "hello", "data", "AI2"]
+print(analyze_strings_list(words))
+
+#3
+def merge_dicts_sum(d1, d2):
+    res = {}
+    for key in d1:
+        res[key] = d1[key]
+    for key in d2:
+        key_exists = False
+        for result_key in res:
+            if key == result_key:
+                key_exists = True
+                break
+        if key_exists:
+            res[key] = res[key] + d2[key]
+        else:
+            res[key] = d2[key]
+    return res
+
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 3, 'c': 4, 'd': 5}
+print(merge_dicts_sum(dict1, dict2))
+
+
+#6
+def deep_sum(d):
+    total = 0
+    for value in d.values():
+        if type(value) == int or type(value) == float:
+            total += value
+        elif type(value) == list:
+            for x in value:
+                if type(x) == int or type(x) == float:
+                    total += x
+        elif type(value) == dict:
+            total += deep_sum(value)
+    return total
+
+print(deep_sum({
+    'a': 1, 'b': 2, 'c': [3, 4], 'd': {"e": 1, "f": 4}
+}))
+
+
+#9
+def common_elements_all(sets_list):
+    if len(sets_list) == 0:
+        return set()
+    res = set()
+    first_set = sets_list[0]
+
+    for element in first_set:
+        in_all = True
+
+        for s in sets_list:
+            if element not in s:
+                in_all = False
+                break
+
+        if in_all:
+            res.add(element)
+    return res
+res6 = [
+    (1, 2, 3),
+    (3, 4, 5, 2),
+    (3, 2, 6)
+]
+print(common_elements_all(res6))
+
+
+
+#12
+filter_strings = lambda s: {
+    x for x in s
+    if len(x) > 4
+    and len({c for c in x}) == len(x)
+    and all(('a' <= c <= 'z') or ('A' <= c <= 'Z') for c in x)
+}
+
+task_12 = {"apple", "Nazerke", "Ersultan", "house"}
+print(filter_strings(task_12))
+
+
+#15
+def filter_dict(d):
+    total = 0
+    count = 0
+    for key in d:
+        total += d[key]
+        count += 1
+    avg = total / count
+    f = lambda d: {k: d[k] for k in d if d[k] >= avg and d[k] % 2 != 0}
+    return f(d)
+
+task_15 = {
+    "Naz": 17,
+    "Maral" : 13,
+    "Diana" : 18,
+    "Zere" : 12,
+    "Botagoz" : 20
+
+}
+print(filter_dict(task_15))
+
+
+
+#18
+def sort_dict_by_value_sum(d):
+    kos={}
+    for key in d:
+        total=0
+        for num in d[key]:
+            total+=num
+            kos[num]=total
+    items=[]
+    for key in d:
+        items.append((key,kos[num]))
+    n=len(items)
+    for i in range(n):
+        for j in range(0,n-i-1):
+            if items[j][1]>items[j+1][1]:
+                items[j],items[j+1]=items[j+1],items[j]
+            elif items[j][1]==items[j+1][1]:
+                if items[j][0]>items[j+1][0]:
+                    items[j],items[j+1]=items[j+1],items[j]
+
+    return items
+d1 = {
+    "a": [1, 2, 3],
+    "b": [10, 20],
+    "c": [5, 5, 5],
+    "d": [1, 1, 1, 1]
+}
+print(sort_dict_by_value_sum(d1))
+
+
+#21
+def count_leaf_values(d):
+    count=0
+    for key in d:
+        value=d[key]
+        if type(value)==dict:
+            count+=count_leaf_values(value)
+        else:
+            count+=1
+    return count
+d1={
+    "apple": 5,
+    "banana": [1,2,3],
+    "kiwi": {
+        "d":10,
+        "e":{
+            "f":20,
+        }
+    }
+}
+result = count_leaf_values(d1)
+print(result)
+
+#24
+def union_of_filtered_sets(sets_list):
+    result=set()
+    for s in sets_list:
+        for num in s:
+            if num >10 and num%2!=0:
+                result.add(num)
+    return result
+sets_list=[
+    {5,11,20},
+    {13,8,25},
+    {7,30,15}
+]
+print(union_of_filtered_sets(sets_list))
+
+
+
+#27
+is_prime=lambda n: n>1 and all(n%i!=0 for i in range(2,int(n**0.5)+1))
+filter_d=lambda d:{k:v for k,v in d.items() if len(k)%2==1 and is_prime(v)}
+data={
+    "a": 2,
+    "diana":5,
+    "sum":4,
+    "asd":5
+}
+print(filter_d(data))
+
+#30
+def partition_by_sum_parity(a):
+    even_set=set()
+    odd_set=set()
+    for num in a:
+        total=0
+        for digit in str(abs(num)):
+            total+=int(digit)
+        if total%2==0:
+            even_set.add(total)
+        else:
+            odd_set.add(total)
+    return (even_set,odd_set)
+nums={123,245,78,9,12}
+even,odd=partition_by_sum_parity(nums)
+print("жұп сандар:",even)
+print("тақ сандар:",odd)
+
+
+
+#33
+filter_by_avg=lambda a:(
+    lambda avg:{
+        i:j
+        for i,j in a.items()
+        if sum(j)/len(j)>avg
+    }
+)(
+    sum(sum(j) for j in a.values())/
+    sum(len(j) for j in a.values())
+    if a and sum(len(j) for j in a.values())>0 else 0
+)
+data={
+    "a":[10,20,30],
+    "b":[1,2,3],
+    "c":[40,50]
+}
+print(filter_by_avg(data))
+
+

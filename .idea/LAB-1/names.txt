@@ -1,3 +1,129 @@
 diana
 nazerke
 maral
+
+
+
+#5
+def compress_text(text):
+    if not text:
+        return ""
+
+    result = []
+    count = 1
+    for i in range(1, len(text)):
+        if text[i].lower() == text[i - 1].lower():
+            count += 1
+        else:
+            result.append(text[i - 1] + (str(count) if count > 1 else ""))
+            count = 1
+    result.append(text[-1] + (str(count) if count > 1 else ""))
+    return "".join(result)
+
+
+#15
+def word_pattern_sort(text):
+    vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+    words_by_len = {}
+
+    for w in text.split():
+        l = len(w)
+        if l not in words_by_len:
+            words_by_len[l] = []
+        words_by_len[l].append(w)
+
+    result = []
+    for length in sorted(words_by_len.keys()):
+        group = words_by_len[length]
+
+        vowel_counts = []
+        for word in group:
+            count = 0
+            for ch in word.lower():
+                if ch in vowels.lower():
+                    count += 1
+            vowel_counts.append((word, count))
+
+        n = len(vowel_counts)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if vowel_counts[j][1] < vowel_counts[j + 1][1]:
+                    vowel_counts[j], vowel_counts[j + 1] = vowel_counts[j + 1], vowel_counts[j]
+                elif vowel_counts[j][1] == vowel_counts[j + 1][1]:
+                    if vowel_counts[j][0] > vowel_counts[j + 1][0]:
+                        vowel_counts[j], vowel_counts[j + 1] = vowel_counts[j + 1], vowel_counts[j]
+
+        for word, _ in vowel_counts:
+            result.append(word)
+
+    return result
+
+
+# 25.1
+from functools import reduce
+
+result = lambda lst: list(
+    map(
+        lambda sub: reduce(lambda a, b: a + b, sub) / len(sub),
+        filter(
+            lambda sub: len(sub) >= 3 and reduce(lambda a, b: a + b, sub) % 2 == 0,
+            lst
+        )
+    )
+)
+
+print(result([[1, 2, 3], [2, 4, 6], [1, 1], [5, 5, 2]]))
+
+
+#15
+def filter_dict(d):
+    total = 0
+    count = 0
+    for key in d:
+        total += d[key]
+        count += 1
+    avg = total / count
+    f = lambda d: {k: d[k] for k in d if d[k] >= avg and d[k] % 2 != 0}
+    return f(d)
+
+task_15 = {
+    "Naz": 17,
+    "Maral" : 13,
+    "Diana" : 18,
+    "Zere" : 12,
+    "Botagoz" : 20
+
+}
+print(filter_dict(task_15))
+
+
+
+#25
+san=lambda d:{
+    k: __import__("functools").reduce(lambda a,b:a*b,[x for x in v if x>0])
+    for k,v in d.items()
+    if len([x for x in v if x>0])>0
+}
+data={
+    "a": [1,2,-3],
+    "b": [-6,-9],
+    "c": [2,4],
+}
+print(san(data))
+
+
+
+#35
+filter_dict2=lambda a:{
+    i:j for i,j in a.items()
+    if not (j%3==0 or len(i)%2==0)
+}
+data={
+    "one":4,
+    "two":9,
+    "four":5,
+    "cat":6,
+    "hello":7
+}
+print(filter_dict2(data))
+

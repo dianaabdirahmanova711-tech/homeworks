@@ -3,3 +3,926 @@
 Общая сумма:470
 Cамы активный покупатель:user_2
 Средний чек:156.66666666666666
+
+
+#2
+task2 = lambda s: " ".join(
+    word[::-1] for word in s.split()
+    if not any(ch.isdigit() for ch in word) and len(word) % 2 == 0
+
+#12
+task12 = lambda s: [
+    w for w in s.split()
+    if w[0].lower() == w[-1].lower()
+    and w.lower() != w[::-1].lower()
+    and len(w) > 3
+]
+
+
+# 22.1
+def group_by_parity_and_sort(nums):
+    evens = []
+    odds = []
+
+    for num in nums:
+        if num % 2 == 0:
+            evens.append(num)
+        else:
+            odds.append(num)
+
+    evens.sort()
+    odds.sort()
+
+    return evens + odds
+
+
+print(group_by_parity_and_sort([7, 2, 5, 8, 1, 4, 3]))
+
+
+#2
+def calculate_average(nums):
+    if not nums:
+        return 0
+    total = 0
+    count = 0
+    for num in nums:
+        total += num
+        count += 1
+    return total / count
+
+filter_numbers = lambda nums: {
+    num for num in nums
+    if num > calculate_average(nums)
+    and num % 2 != 0
+    and num % 5 != 0
+}
+
+s1 = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(filter_numbers(s1))
+
+
+#12
+filter_strings = lambda s: {
+    x for x in s
+    if len(x) > 4
+    and len({c for c in x}) == len(x)
+    and all(('a' <= c <= 'z') or ('A' <= c <= 'Z') for c in x)
+}
+
+task_12 = {"apple", "Nazerke", "Ersultan", "house"}
+print(filter_strings(task_12))
+
+
+#22
+a=lambda x1,x2:{
+    x for x in x1
+    if x not in x2 and x>(lambda t:(
+        (lambda total=0: (
+            (lambda s=0: (
+                s
+            ))()
+        ))()
+    ))(x2)
+}
+b={3,5,7,10}
+d={2,4,6}
+print(a(b,d))
+
+
+#32
+def parawise_intersections(sets_list):
+    intersections=[]
+    for i in range(len(sets_list)-1):
+        intersections.append(sets_list[i] & sets_list[i+1])
+    return intersections
+sets_list=[{9,8,7},{6,8,7},{7,6,1}]
+print(parawise_intersections(sets_list))
+
+
+#Big Data 2
+def analyze_orders(a):
+    pro_order=[]
+    count={}
+    all_vowels=[]
+    unique=[]
+    vowels="oiuyea"
+    k=0
+    while k<len(a):
+        order=a[k]
+        customer=order["customer"]
+        digit=False
+        for i in customer:
+            if "0"<=i<="9":
+                digit=False
+                break
+        if digit:
+            k+=1
+            continue
+        costomer=customer.title()
+        pro=[]
+        summa=0
+        j=0
+        while j<len(order["items"]):
+            item=order["items"][j]
+            name=item["name"]
+            price=item["price"]
+            quantity=item["quantity"]
+            if price <=0:
+                j+=1
+                continue
+            if quantity%2==1:
+                n=int(price)
+                summa=0
+                while n>0:
+                    summa+=n%10
+                    n//=10
+                price=price+summa
+            pro.append({
+                "name":name,
+                "price":price
+            })
+            summa+=price
+            exis=False
+            c=0
+            while c<len(unique):
+                if unique[c]==name:
+                    exis=True
+                c+=1
+            if not exis:
+                unique.append(name)
+            j+=1
+        text=" ".join(order["notes"])
+        words=text.split()
+        un_word=[]
+        j=0
+        while j<len(words):
+            w=words[j]
+            if len(w)>=4 and w!=w[::-1]:
+                exis=False
+                c=0
+                while c<len(un_word):
+                    if un_word[c]==w:
+                        exis=True
+                    c+=1
+                if not exis:
+                    un_word.append(w)
+            j+=1
+        j=0
+        while j<len(un_word):
+            w=un_word[j]
+            if w in count:
+                count[w]+=1
+            else:
+                count[w]=1
+            m=0
+            while m<len(w):
+                i=w[m].lower()
+                index=0
+                while index<len(vowels):
+                    if i==vowels[index]:
+                        found=False
+                        t=0
+                        while t<len(all_vowels):
+                            if all_vowels[t]==vowels[index]:
+                                found=True
+                            t+=1
+                        if not found:
+                            all_vowels.append(vowels[index])
+                    index+=1
+                m+=1
+            j+=1
+        pro_order.append({
+            "order_id":order["order_id"],
+            "customer":customer,
+            "pro":pro,
+            "total":summa
+        })
+        k+=1
+    filtered={}
+    for w in count:
+        if count[w]>=2:
+            filtered[w]=count[w]
+    k=0
+    while k<len(pro_order):
+        best=k
+        j=k+1
+        while j<len(pro_order):
+            if pro_order[j]["total"]>pro_order[best]["total"]:
+                best=j
+            elif pro_order[j]["total"]==pro_order[best]["total"]:
+                if pro_order[j]["order_id"]<pro_order[best]["order_id"]:
+                    best=j
+            j+=1
+        temp=pro_order[k]
+        pro_order[k]=pro_order[best]
+        pro_order[best]=temp
+        k+=1
+    or_total=[]
+    k=0
+    while k<len(pro_order):
+        or_total.append(pro_order[k]["order_id"])
+        k+=1
+    or_item={}
+    k=0
+    while k<len(pro_order):
+        amount=len(pro_order[k]["pro"])
+        if amount in or_item:
+            or_item[amount].append(pro_order[k]["order_id"])
+        else:
+            or_item[amount]=[pro_order[k]["order_id"]]
+        k+=1
+    return {
+        "orders":pro_order,
+        "word_counts":filtered,
+        "all_vowels":all_vowels,
+        "unique_products":unique,
+        "orders_by_total":or_total,
+        "orders_by_item_count":or_item
+    }
+data=[
+    {
+        "order_id":"A123",
+        "customer":"maral_doe08",
+        "items":[
+            {"name":"Laptop","price":999.99,"quantity":1},
+            {"name":"Mouse2","price":25,"quantity":2}
+        ],
+        "notes":["Nazerke TASTA","fragile package","handle with care"]
+    },
+    {
+        "order_id":"B456",
+        "customer":"diana_smith",
+        "items":[
+            {"name":"Manitor","price":200,"quantity":2},
+            {"name":"Keyboard","price":50,"quantity":1}
+        ],
+        "notes":["Tumar with care","fast delivery"]
+    },
+    {
+        "order_id":"C789",
+        "customer":"nurshat",
+        "items":[
+            {"name":"Laptop","price":900,"quantity":2}
+        ],
+        "notes":["fragile package","deliver tomorrow"]
+    }
+]
+print(analyze_orders(data))
+
+
+
+
+
+
+
+
+#2
+task2 = lambda s: " ".join(
+    word[::-1] for word in s.split()
+    if not any(ch.isdigit() for ch in word) and len(word) % 2 == 0
+)
+
+#4
+task4 = lambda s: " ".join(
+    w.lower() for w in s.split()
+    if sum(1 for ch in w if ch.isupper()) == 1
+    and not (w[0].isupper() or w[-1].isupper())
+)
+
+#6
+task6 = lambda s: [
+    w for w in s.split() if len(w) >= 4
+    and w.isalpha()
+    and len(set(w)) == len(w)
+]
+
+
+#8
+vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+task8 = lambda s: " ".join(
+    "VOWEL" if w.isalpha() and w[0].lower() in vowels.lower() else
+    "CONSONANT" if w.isalpha() and w[0].lower() not in vowels.lower() else
+    w
+    for w in s.split()
+)
+
+#10
+task10 = lambda s: sum(
+    1 for w in s.split()
+    if any(ch.isdigit() for ch in w)
+    and not w[0].isdigit()
+    and len(w) >= 5
+)
+
+#12
+task12 = lambda s: [
+    w for w in s.split()
+    if w[0].lower() == w[-1].lower()
+    and w.lower() != w[::-1].lower()
+    and len(w) > 3
+]
+
+#14
+vowels = "aeiouyаеёиоуыэюяAEIOUYАЕЁИОУЫЭЮЯ"
+task14 = lambda s: ", ".join(
+    w for w in s.split()
+    if len(set(w)) > 3
+    and len([ch for ch in w if ch in vowels]) == len(set(ch for ch in w if ch in vowels))
+)
+
+# 16.1
+def transform_list(nums):
+    result = []
+    for i in nums:
+        if i < 0:
+            continue
+        if i % 2 == 0:
+            result.append(i ** 2)
+        elif i > 10:
+            summa = 0
+            x = i
+            while x > 0:
+                summa += x % 10
+                x //= 10
+            result.append(summa)
+        else:
+            result.append(i)
+    return result
+
+
+nums = list(map(int, input().split()))
+print(transform_list(nums))
+
+
+# 18.1
+def flatten_and_filter(lst):
+    result = []
+
+    def flatten(sublist):
+        for item in sublist:
+            if isinstance(item, list):
+                flatten(item)
+            elif isinstance(item, int):
+                if (
+                        item > 0 and
+                        item % 4 != 0 and
+                        len(str(item)) > 1
+                ):
+                    result.append(item)
+
+    flatten(lst)
+    result.sort()
+    return result
+
+
+data = [1, [12, -5, [33, 8], 44], [[101, 3], 16], 25]
+print(flatten_and_filter(data))
+
+# 20.1
+def max_subarray_sum(nums, k):
+    if k > len(nums) or k <= 0:
+        return None
+    max_sum = None
+    for i in range(len(nums) - k + 1):
+        window = nums[i:i + k]
+        valid = True
+        current_sum = 0
+
+        for num in window:
+            if num <= 0:
+                valid = False
+                break
+            current_sum += num
+
+        if valid:
+            if max_sum is None or current_sum > max_sum:
+                max_sum = current_sum
+    return max_sum
+
+
+print(max_subarray_sum([1, 0, 3, -2, 5], 2))
+
+
+# 22.1
+def group_by_parity_and_sort(nums):
+    evens = []
+    odds = []
+
+    for num in nums:
+        if num % 2 == 0:
+            evens.append(num)
+        else:
+            odds.append(num)
+
+    evens.sort()
+    odds.sort()
+
+    return evens + odds
+
+
+print(group_by_parity_and_sort([7, 2, 5, 8, 1, 4, 3]))
+
+# 24.1
+def longest_increasing_sublist(nums):
+    if not nums:
+        return []
+
+    max_sublist = []
+    current_sublist = [nums[0]]
+
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i - 1]:
+            current_sublist.append(nums[i])
+        else:
+            if len(current_sublist) > len(max_sublist):
+                max_sublist = current_sublist
+            current_sublist = [nums[i]]
+
+    if len(current_sublist) > len(max_sublist):
+        max_sublist = current_sublist
+
+    return max_sublist
+
+
+print(longest_increasing_sublist([1, 2, 3, 2, 3, 4, 1, 2]))
+
+
+# 26.1
+def remove_duplicates_keep_last(nums):
+    seen = []
+    result_reversed = []
+
+    for num in reversed(nums):
+        if num not in seen:
+            seen.append(num)
+            result_reversed.append(num)
+
+    result = []
+    for num in reversed(result_reversed):
+        result.append(num)
+
+    return result
+
+
+print(remove_duplicates_keep_last([1, 2, 3, 2, 4, 1, 5]))
+
+# 28.1
+def moving_average(nums, k):
+    if k <= 0 or k > len(nums):
+        return []
+
+    averages = []
+
+    for i in range(len(nums) - k + 1):
+        window = nums[i:i + k]
+
+        if any(n < 0 for n in window):
+            continue
+
+        total = 0
+        for n in window:
+            total += n
+
+        avg = total / k
+        averages.append(avg)
+
+    return averages
+
+
+print(moving_average([1, 2, 3, -1, 4, 5, 6], 3))
+
+
+# 30.1
+def analyze_strings_list(words):
+    seen = set()
+    result = []
+
+    for word in words:
+        if any(char.isdigit() for char in word):
+            continue
+
+        if len(word) % 2 == 0:
+            processed = word[::-1]
+        else:
+            processed = word.upper()
+
+        if processed not in seen:
+            seen.add(processed)
+            result.append(processed)
+
+    return result
+
+
+words = ["hello", "world1", "python", "code", "hello", "data", "AI2"]
+print(analyze_strings_list(words))
+
+
+#2
+def calculate_average(nums):
+    if not nums:
+        return 0
+    total = 0
+    count = 0
+    for num in nums:
+        total += num
+        count += 1
+    return total / count
+
+filter_numbers = lambda nums: {
+    num for num in nums
+    if num > calculate_average(nums)
+    and num % 2 != 0
+    and num % 5 != 0
+}
+
+s1 = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(filter_numbers(s1))
+
+#4
+def filter_sets(sets_list):
+    res = []
+    for set in sets_list:
+       if len(set) > 3:
+           negative = False
+           even_number = False
+           for num in set:
+               if num < 0:
+                   negative = True
+               if num % 2 == 0:
+                   even_number = True
+           if even_number and not negative:
+                res.append(set)
+    return res
+
+sets = [
+    {1, 2, 3, 4},
+    {-1, 2, 3, 4, 5},
+    {1, 3, 5, 7},
+    {1, 2, 3},
+    {2, 4, 6, 8, 10},
+    {0, 1, 2, 3, -5},
+    {10, 20, 30, 40},
+]
+print(filter_sets(sets))
+
+#6
+def deep_sum(d):
+    total = 0
+    for value in d.values():
+        if type(value) == int or type(value) == float:
+            total += value
+        elif type(value) == list:
+            for x in value:
+                if type(x) == int or type(x) == float:
+                    total += x
+        elif type(value) == dict:
+            total += deep_sum(value)
+    return total
+
+print(deep_sum({
+    'a': 1, 'b': 2, 'c': [3, 4], 'd': {"e": 1, "f": 4}
+}))
+
+#8
+def sort_dict_by_value_length(d):
+    items = list(d.items())
+    for i in range(len(items)):
+        for j in range(len(items) - 1):
+            if (len(items[j][1]) > len(items[j + 1][1])) or \
+                    (len(items[j][1]) == len(items[j + 1][1]) and items[j][0] > items[j + 1][0]):
+                items[j], items[j + 1] = items[j + 1], items[j]
+    return items
+res5 = {
+    "a" : "hello",
+    "b" : "world!",
+    "c" : "Naz",
+    "d" : "Diana",
+    "e" : "Maral",
+    "f" : "Zere"
+}
+print(sort_dict_by_value_length(res5))
+
+
+#10
+def filter_lists(lst):
+    for i in range(len(lst)):
+        for j in range(len(lst) - 1):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+filter_dict10 = lambda d: {
+    k: filter_lists([x for x in v if x%2 != 0])
+    for k,v in d.items()
+    if len([x for x in v if x % 2 != 0]) > 0
+}
+task_10 = {
+    "a" : [1, 2, 3, 4],
+    "b" : [1, 2, 3, 5],
+    "c" : [3, 6, 9, 12]
+}
+print(filter_dict10(task_10))
+
+#12
+filter_strings = lambda s: {
+    x for x in s
+    if len(x) > 4
+    and len({c for c in x}) == len(x)
+    and all(('a' <= c <= 'z') or ('A' <= c <= 'Z') for c in x)
+}
+
+task_12 = {"apple", "Nazerke", "Ersultan", "house"}
+print(filter_strings(task_12))
+
+
+#14
+def top_k_frequent(nums, k):
+    res = set()
+    count = 0
+    x = {}
+    for num in nums:
+        if num in x:
+            x[num] += 1
+        else:
+            x[num] = 1
+    while count < k and len(x) > 0:
+        best_num = None
+        best = -1
+        for num in x:
+            if x[num] > best:
+                best = x[num]
+                best_num = num
+            elif x[num] == best and num < best_num:
+                best_num = num
+        res.add(best_num)
+        del x[best_num]
+        count += 1
+    return res
+
+task_14 = [1, 1, 1, 3, 2, 4, 3]
+print(top_k_frequent(task_14, 2))
+
+
+#16
+def update_counts(d, items):
+    for item in items:
+        if item in d:
+            d[item] += 1
+        else:
+            d[item] = 1
+    return d
+d={"apple":2,"banana":3}
+items = ["apple","banana"]
+n=update_counts(d, items)
+print(n)
+
+
+#18
+def sort_dict_by_value_sum(d):
+    kos={}
+    for key in d:
+        total=0
+        for num in d[key]:
+            total+=num
+            kos[num]=total
+    items=[]
+    for key in d:
+        items.append((key,kos[num]))
+    n=len(items)
+    for i in range(n):
+        for j in range(0,n-i-1):
+            if items[j][1]>items[j+1][1]:
+                items[j],items[j+1]=items[j+1],items[j]
+            elif items[j][1]==items[j+1][1]:
+                if items[j][0]>items[j+1][0]:
+                    items[j],items[j+1]=items[j+1],items[j]
+
+    return items
+d1 = {
+    "a": [1, 2, 3],
+    "b": [10, 20],
+    "c": [5, 5, 5],
+    "d": [1, 1, 1, 1]
+}
+print(sort_dict_by_value_sum(d1))
+
+#20
+task = lambda d: [k for k, v in sorted(d.items(), key=lambda item: (item[1], len(item[0])))][:3]
+d1 = {
+    "apple": 5,
+    "banana": 2,
+    "kiwi": 5,
+    "pear": 3,
+    "plum": 2
+}
+result = task(d1)
+sorted_items = sorted(d1.items(), key=lambda item: (item[1], len(item[0])))
+print(f"Алынған кілттер: {result}")
+
+#22
+a=lambda x1,x2:{
+    x for x in x1
+    if x not in x2 and x>(lambda t:(
+        (lambda total=0: (
+            (lambda s=0: (
+                s
+            ))()
+        ))()
+    ))(x2)
+}
+b={3,5,7,10}
+d={2,4,6}
+print(a(b,d))
+
+
+#24
+def union_of_filtered_sets(sets_list):
+    result=set()
+    for s in sets_list:
+        for num in s:
+            if num >10 and num%2!=0:
+                result.add(num)
+    return result
+sets_list=[
+    {5,11,20},
+    {13,8,25},
+    {7,30,15}
+]
+print(union_of_filtered_sets(sets_list))
+
+
+#26
+def remove_elements_with_common_digits(a):
+    digit_sum={}
+    for num in a:
+        n=abs(num)
+        digits=set()
+        if n==0:
+            digits.add(0)
+        while n>0:
+            digits.add(n%10)
+            n=n//10
+        for d in digits:
+            if d in digit_sum:
+                digit_sum[d]+=1
+            else:
+                digit_sum[d]=1
+    result=set()
+    for num in a:
+        n=abs(num)
+        digits=set()
+        if n==0:
+            digits.add(0)
+        while n>0:
+            digits.add(n%10)
+            n=n//10
+        if all(digit_sum[d]==1 for d in digits):
+            result.add(num)
+    return result
+a={12,23,34,45,56,11}
+print(remove_elements_with_common_digits(a))
+
+
+#28
+def sorted_unique_chars(d):
+    chars=set()
+    for a in d:
+        for b in a:
+            if b<'0' or b>'9':
+                if b !='':
+                    chars.add(b)
+    return sorted(chars)
+d=["diana","banana","zere2","a l a"]
+print(sorted_unique_chars(d))
+
+
+#30
+def partition_by_sum_parity(a):
+    even_set=set()
+    odd_set=set()
+    for num in a:
+        total=0
+        for digit in str(abs(num)):
+            total+=int(digit)
+        if total%2==0:
+            even_set.add(total)
+        else:
+            odd_set.add(total)
+    return (even_set,odd_set)
+nums={123,245,78,9,12}
+even,odd=partition_by_sum_parity(nums)
+print("жұп сандар:",even)
+print("тақ сандар:",odd)
+
+
+
+#32
+def parawise_intersections(sets_list):
+    intersections=[]
+    for i in range(len(sets_list)-1):
+        intersections.append(sets_list[i] & sets_list[i+1])
+    return intersections
+sets_list=[{9,8,7},{6,8,7},{7,6,1}]
+print(parawise_intersections(sets_list))
+
+
+
+#34
+def top_k_smallest_unique(a,b):
+    unique=[]
+    for i in a:
+        if i not in unique:
+            unique.append(i)
+    j=0
+    while j<len(unique):
+        index=j
+        k=j+1
+        while k<len(unique):
+            if unique[k]<unique[index]:
+                index=k
+            k+=1
+        temp=unique[j]
+        unique[j]=unique[index]
+        unique[index]=temp
+        j+=1
+    result=set()
+    count=0
+    for i in unique:
+        if count<b:
+            result.add(i)
+            count+=1
+    return result
+a=list(map(int,input().split()))
+b=int(input())
+print(top_k_smallest_unique(a,b))
+
+
+#36
+def all_subsets_of_size_k(a,b):
+    result=[]
+    elems=[]
+    for i in a:
+        elems.append(i)
+    def backtrack(c,d):
+        if len(d)==b:
+            e=set()
+            for j in d:
+                e.add(j)
+            result.append(e)
+            return
+        k=c
+        while k<len(elems):
+            d.append(elems[k])
+            backtrack(k+1,d)
+            d.pop()
+            k+=1
+    backtrack(0,[])
+    return result
+a=list(map(int,input().split()))
+b=int(input())
+print(all_subsets_of_size_k(a,b))
+
+
+#38
+def multi_symmetric_difference(a):
+    if len(a)==0:
+        return []
+    result=set()
+    for i in a:
+        new=set()
+        for j in result:
+            if j not in i:
+                new.add(j)
+        for j in i:
+            if j not in result:
+                new.add(j)
+        result=new
+    return result
+a={1,2,3}
+b={3,4,5}
+c={5,6}
+print(multi_symmetric_difference([a,b,c]))
+
+
+#40
+def analyze_dict_keys(a):
+    result=set()
+    punct=".,!@#$%^&*()[]{}<>?""''/\|+-*_=`~:;"
+    for i in a:
+        if type(i)==str:
+            digit=False
+            for j in i:
+                if "0"<=j<="9":
+                    digit=True
+                    break
+            if not digit:
+                for j in i:
+                    if j !=" " and j not in punct:
+                        result.add(j)
+    return result
+data={
+    "hello world":1,
+    "test123":2,
+    "good-day!":3,
+    100:"number"
+}
+print(analyze_dict_keys(data))
