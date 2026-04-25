@@ -587,3 +587,44 @@ def battle_test():
         "warrior_hp": w.hp,
         "mage_item_power": m.inventory[0].power
     }
+
+
+
+
+#const heart=new NextParticle({
+    renderer:'webgl',
+    image:document.querySelector("#valentines"),
+    width:window.innerWidth,
+    height:window.innerHeight,
+    particleGap:settings.particleGap,
+    particleSize:settings.particleSize,
+    mouseForce:settings.mouseForce,
+    noise:settings.noise,
+    layerCount:settings.layerCount,
+    layerDistance:settings.layerDistance,
+});
+
+
+
+
+
+
+
+import turtle
+from idlelib import window
+
+t = turtle.Turtle()
+t.color("red")
+t.begin_fill()
+
+t.left(140)
+t.forward(180)
+
+t.circle(-90, 200)
+t.left(120)
+t.circle(-90, 200)
+
+t.forward(180)
+t.end_fill()
+
+turtle.done()

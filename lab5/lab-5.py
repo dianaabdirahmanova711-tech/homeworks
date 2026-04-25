@@ -318,79 +318,63 @@ def sort_products_by_price(df):
 
 
 #Block4
-import pandas as pd
-data = {
-    'user_name': ['John', 'John', 'Alice'],
-    'order_id': [101, 103, 102],
-    'product_name': ['Laptop', 'Shirt', 'Mouse'],
-    'category': ['Electronics', 'Clothing', 'Clothing'],
-    'price': [1200, 500, 25]
-}
+from fastapi import FastAPI
 
-df = pd.DataFrame(data)
+app = FastAPI()
+@app.get("/31-45/report")
+def final_report():
+    df = build_df()
 
-#  31
-df['quantity'] = 1
+    # 31
+    df["quantity"] = 1
 
-#  32
-df['total_price'] = df['price'] * df['quantity']
+    # 32
+    df["total_price"] = df["price"] * df["quantity"]
 
-# 33
-electronics = df[df['category'] == 'Electronics']
+    # 33
+    electronics = df[df["category"] == "Electronics"]
 
-#  34
-count_by_category = df.groupby('category').size().reset_index(name='count')
+    # 34
+    cat_count = df.groupby("category").size()
 
-#  35
-mean_price = df.groupby('category')['price'].mean().reset_index(name='mean_price')
+    # 35
+    mean_price = df.groupby("category")["price"].mean()
 
-# 36
-sorted_orders = df.sort_values(by='total_price', ascending=False)
+    # 36
+    sorted_df = df.sort_values(by="total_price", ascending=False)
 
-#  37
-top3 = df.sort_values(by='total_price', ascending=False).head(3)
+    # 37
+    top3 = sorted_df.head(3)
 
-# 38
-users = pd.DataFrame({
-    'user_id': [1, 2],
-    'user_name': ['John', 'Alice']
-})
 
-orders = pd.DataFrame({
-    'order_id': [101, 102],
-    'user_id': [1, 2],
-    'total_price': [1200, 50]
-})
+    # 39
+    mean_total = df.groupby("user_name")["total_price"].mean()
 
-merged = orders.merge(users, on='user_id')
+    # 40
+    orders_count = df.groupby("user_name").size()
 
-# 39
-mean_total = df.groupby('user_name')['total_price'].mean().reset_index(name='mean_total')
+    # 41
+    max_order = df.groupby("user_name")["total_price"].max()
 
-#  40
-orders_count = df.groupby('user_name').size().reset_index(name='orders_count')
+    # 42
+    unique_cat = df.groupby("user_name")["category"].nunique()
 
-#  41
-max_order = df.groupby('user_name')['total_price'].max().reset_index(name='max_order')
+    # 45
+    result = df.groupby("user_name").agg(
+        total_orders=("order_id", "count"),
+        total_sum=("total_price", "sum"),
+        mean_total=("total_price", "mean"),
+        max_order=("total_price", "max"),
+        unique_categories=("category", "nunique")
+    ).reset_index()
 
-# 42
-unique_categories = df.groupby('user_name')['category'].nunique().reset_index(name='unique_categories')
+    # 43
+    result["VIP"] = result["total_sum"] > 1000
 
-#  45
-final = df.groupby('user_name').agg(
-    total_orders=('order_id', 'count'),
-    total_sum=('total_price', 'sum'),
-    mean_total=('total_price', 'mean'),
-    max_order=('total_price', 'max'),
-    unique_categories=('category', 'nunique')
-).reset_index()
+    # 44
+    result = result.sort_values(
+        by=["total_sum", "mean_total"],
+        ascending=[False, True]
+    )
 
-#  43
-final['VIP'] = final['total_sum'] > 1000
-
-#  44
-final_sorted = final.sort_values(by=['total_sum', 'mean_total'], ascending=[False, True])
-
-# Вывод
-print("FINAL RESULT:")
-print(final_sorted)
+    return result.to_dict(orient="records")

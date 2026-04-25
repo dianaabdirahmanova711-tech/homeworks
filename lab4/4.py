@@ -498,3 +498,83 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+import pandas as pd
+data = {
+    'user_name': ['John', 'John', 'Alice'],
+    'order_id': [101, 103, 102],
+    'product_name': ['Laptop', 'Shirt', 'Mouse'],
+    'category': ['Electronics', 'Clothing', 'Clothing'],
+    'price': [1200, 500, 25]
+}
+
+df = pd.DataFrame(data)
+
+#  31
+df['quantity'] = 1
+
+#  32
+df['total_price'] = df['price'] * df['quantity']
+
+# 33
+electronics = df[df['category'] == 'Electronics']
+
+#  34
+count_by_category = df.groupby('category').size().reset_index(name='count')
+
+#  35
+mean_price = df.groupby('category')['price'].mean().reset_index(name='mean_price')
+
+# 36
+sorted_orders = df.sort_values(by='total_price', ascending=False)
+
+#  37
+top3 = df.sort_values(by='total_price', ascending=False).head(3)
+
+# 38
+users = pd.DataFrame({
+    'user_id': [1, 2],
+    'user_name': ['John', 'Alice']
+})
+
+orders = pd.DataFrame({
+    'order_id': [101, 102],
+    'user_id': [1, 2],
+    'total_price': [1200, 50]
+})
+
+merged = orders.merge(users, on='user_id')
+
+# 39
+mean_total = df.groupby('user_name')['total_price'].mean().reset_index(name='mean_total')
+
+#  40
+orders_count = df.groupby('user_name').size().reset_index(name='orders_count')
+
+#  41
+max_order = df.groupby('user_name')['total_price'].max().reset_index(name='max_order')
+
+# 42
+unique_categories = df.groupby('user_name')['category'].nunique().reset_index(name='unique_categories')
+
+#  45
+final = df.groupby('user_name').agg(
+    total_orders=('order_id', 'count'),
+    total_sum=('total_price', 'sum'),
+    mean_total=('total_price', 'mean'),
+    max_order=('total_price', 'max'),
+    unique_categories=('category', 'nunique')
+).reset_index()
+
+#  43
+final['VIP'] = final['total_sum'] > 1000
+
+#  44
+final_sorted = final.sort_values(by=['total_sum', 'mean_total'], ascending=[False, True])
+
+# Вывод
+print("FINAL RESULT:")
+print(final_sorted)
